@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
@@ -19,23 +20,10 @@ function _setPrototypeOf(o, p) {
 var styles = {"test":"_3ybTi"};
 
 var findIP = function findIP() {
-  return new Promise(function (r) {
-    var w = window,
-        a = new (w.RTCPeerConnection || w.mozRTCPeerConnection || w.webkitRTCPeerConnection)({
-      iceServers: []
-    }),
-        b = function b() {};
-
-    a.createDataChannel("");
-    a.createOffer(function (c) {
-      return a.setLocalDescription(c, b, b);
-    }, b);
-
-    a.onicecandidate = function (c) {
-      try {
-        c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r);
-      } catch (e) {}
-    };
+  return axios.get("https://api.ipify.org?format=json").then(function (response) {
+    return response.data.ip;
+  })["catch"](function (error) {
+    return console.log(error);
   });
 };
 
@@ -64,7 +52,9 @@ var MyIpAddress = /*#__PURE__*/function (_React$Component) {
     var _this2 = this;
 
     findIP().then(function (ip) {
-      return _this2.setState({
+      console.log(ip);
+
+      _this2.setState({
         clientIp: ip
       });
     })["catch"](function (e) {

@@ -13,7 +13,7 @@ export class MyIpAddress extends React.Component {
   }
 
   componentDidMount(){
-    findIP().then(ip => this.setState({clientIp:ip})).catch(e => console.error(e))
+    findIP().then((ip) => {console.log(ip);this.setState({clientIp:ip})}).catch(e => console.error(e))
   }
 
   render() {

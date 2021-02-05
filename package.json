@@ -1,6 +1,6 @@
 {
   "name": "dixita-lib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "making my own lib to import in other react project",
   "author": "dixitaNJ",
   "license": "No",
@@ -49,5 +49,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
